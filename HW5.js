@@ -12,12 +12,19 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 4787);
 
-app.post('/post-page',function(req,res){
-  res.render('post-page')
+app.post('/form-page',function(req,res){
+
+  res.render('form-page');
 });
 
-app.get('/get-page',function(req,res){
-  res.render('get-page');
+app.get('/form-page',function(req,res){
+  var queries = [];
+  for (var q in req.query){
+    queries.push({'name':p,'value':req.query[q]})
+  }
+  var context = {};
+  context.qData = queries;
+  res.render('GET-form', qData);
 });
 
 app.use(function(req,res){
